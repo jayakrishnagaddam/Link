@@ -1,19 +1,20 @@
--- SQL schema for Fitness App
+-- SQL schema for Fitness App (MSSQL version with sample data)
 
 -- Users table (general user info including clients, trainers, and admins)
 CREATE TABLE Users (
-    user_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT PRIMARY KEY IDENTITY(1,1),
     name VARCHAR(100),
     email VARCHAR(100) UNIQUE,
     password_hash VARCHAR(255),
-    role ENUM('client', 'trainer', 'admin') NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    role VARCHAR(10) CHECK (role IN ('client', 'trainer', 'admin')),
+    created_at DATETIME DEFAULT GETDATE()
 );
 
-INSERT INTO Users (name, email, password_hash, role) VALUES
-('Alice Smith', 'alice@example.com', 'hashed_pw1', 'client'),
-('Bob Trainer', 'bob@example.com', 'hashed_pw2', 'trainer'),
-('Carol Admin', 'carol@example.com', 'hashed_pw3', 'admin');
+INSERT INTO Users (name, email, password_hash, role)
+VALUES 
+('Alice Smith', 'alice@example.com', 'hashed_password_1', 'client'),
+('Bob Johnson', 'bob@example.com', 'hashed_password_2', 'trainer'),
+('Admin User', 'admin@example.com', 'hashed_password_3', 'admin');
 
 -- Client profiles with fitness goals and stats
 CREATE TABLE ClientProfiles (
@@ -21,30 +22,31 @@ CREATE TABLE ClientProfiles (
     age INT,
     height_cm INT,
     weight_kg INT,
-    gender ENUM('male', 'female', 'other'),
+    gender VARCHAR(10) CHECK (gender IN ('male', 'female', 'other')),
     fitness_goal VARCHAR(100),
-    fitness_level ENUM('beginner', 'intermediate', 'advanced'),
+    fitness_level VARCHAR(15) CHECK (fitness_level IN ('beginner', 'intermediate', 'advanced')),
     FOREIGN KEY (client_id) REFERENCES Users(user_id)
 );
 
-INSERT INTO ClientProfiles (client_id, age, height_cm, weight_kg, gender, fitness_goal, fitness_level) VALUES
-(1, 28, 165, 60, 'female', 'Weight loss', 'beginner');
+INSERT INTO ClientProfiles (client_id, age, height_cm, weight_kg, gender, fitness_goal, fitness_level)
+VALUES (1, 28, 170, 65, 'female', 'Weight Loss', 'beginner');
 
 -- Workout Programs
 CREATE TABLE WorkoutPrograms (
-    program_id INT PRIMARY KEY AUTO_INCREMENT,
+    program_id INT PRIMARY KEY IDENTITY(1,1),
     title VARCHAR(100),
     category VARCHAR(50),
     duration_minutes INT,
-    difficulty ENUM('beginner', 'intermediate', 'advanced'),
+    difficulty VARCHAR(15) CHECK (difficulty IN ('beginner', 'intermediate', 'advanced')),
     equipment_required TEXT,
     description TEXT,
     popularity_score INT DEFAULT 0
 );
 
-INSERT INTO WorkoutPrograms (title, category, duration_minutes, difficulty, equipment_required, description) VALUES
-('Full Body Blast', 'Strength', 45, 'intermediate', 'Dumbbells', 'A full body workout to build strength'),
-('Morning Yoga', 'Flexibility', 30, 'beginner', 'Yoga Mat', 'Start your day with relaxing yoga');
+INSERT INTO WorkoutPrograms (title, category, duration_minutes, difficulty, equipment_required, description)
+VALUES 
+('Full Body Beginner', 'Strength', 45, 'beginner', 'Dumbbells', 'A full body program for beginners'),
+('Cardio Blast', 'Cardio', 30, 'intermediate', 'Treadmill', 'Intense cardio session for fat burn');
 
 -- Favorites
 CREATE TABLE Favorites (
@@ -55,12 +57,11 @@ CREATE TABLE Favorites (
     FOREIGN KEY (program_id) REFERENCES WorkoutPrograms(program_id)
 );
 
-INSERT INTO Favorites (user_id, program_id) VALUES
-(1, 1), (1, 2);
+INSERT INTO Favorites (user_id, program_id) VALUES (1, 1);
 
 -- Workout Tracking
 CREATE TABLE WorkoutLogs (
-    log_id INT PRIMARY KEY AUTO_INCREMENT,
+    log_id INT PRIMARY KEY IDENTITY(1,1),
     user_id INT,
     program_id INT,
     exercise_name VARCHAR(100),
@@ -73,12 +74,12 @@ CREATE TABLE WorkoutLogs (
     FOREIGN KEY (program_id) REFERENCES WorkoutPrograms(program_id)
 );
 
-INSERT INTO WorkoutLogs (user_id, program_id, exercise_name, sets, reps, weight_kg, duration_minutes, log_date) VALUES
-(1, 1, 'Squat', 3, 12, 20.0, 45, '2025-05-06');
+INSERT INTO WorkoutLogs (user_id, program_id, exercise_name, sets, reps, weight_kg, duration_minutes, log_date)
+VALUES (1, 1, 'Squat', 3, 12, 40.5, 45, GETDATE());
 
 -- Calendar Scheduling
 CREATE TABLE WorkoutSchedule (
-    schedule_id INT PRIMARY KEY AUTO_INCREMENT,
+    schedule_id INT PRIMARY KEY IDENTITY(1,1),
     user_id INT,
     program_id INT,
     scheduled_time DATETIME,
@@ -87,24 +88,27 @@ CREATE TABLE WorkoutSchedule (
     FOREIGN KEY (program_id) REFERENCES WorkoutPrograms(program_id)
 );
 
-INSERT INTO WorkoutSchedule (user_id, program_id, scheduled_time, recurrence_pattern) VALUES
-(1, 1, '2025-05-08 07:00:00', 'daily');
+INSERT INTO WorkoutSchedule (user_id, program_id, scheduled_time, recurrence_pattern)
+VALUES (1, 2, DATEADD(DAY, 1, GETDATE()), 'Daily');
 
 -- Reminders
 CREATE TABLE Reminders (
-    reminder_id INT PRIMARY KEY AUTO_INCREMENT,
+    reminder_id INT PRIMARY KEY IDENTITY(1,1),
     user_id INT,
     schedule_id INT,
-    type ENUM('email', 'push', 'sms'),
-    reminder_time INTERVAL,
-    reminder_sent BOOLEAN DEFAULT FALSE,
+    type VARCHAR(10) CHECK (type IN ('email', 'push', 'sms')),
+    reminder_time DATETIME,
+    reminder_sent BIT DEFAULT 0,
     FOREIGN KEY (user_id) REFERENCES Users(user_id),
     FOREIGN KEY (schedule_id) REFERENCES WorkoutSchedule(schedule_id)
 );
 
+INSERT INTO Reminders (user_id, schedule_id, type, reminder_time)
+VALUES (1, 1, 'email', DATEADD(HOUR, -1, (SELECT scheduled_time FROM WorkoutSchedule WHERE schedule_id = 1)));
+
 -- Nutrition Logging
 CREATE TABLE NutritionLogs (
-    log_id INT PRIMARY KEY AUTO_INCREMENT,
+    log_id INT PRIMARY KEY IDENTITY(1,1),
     user_id INT,
     log_date DATE,
     meal_name VARCHAR(100),
@@ -115,8 +119,8 @@ CREATE TABLE NutritionLogs (
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
-INSERT INTO NutritionLogs (user_id, log_date, meal_name, calories, protein_grams, carbs_grams, fats_grams) VALUES
-(1, '2025-05-06', 'Breakfast - Oats', 300, 10.5, 45.0, 8.0);
+INSERT INTO NutritionLogs (user_id, log_date, meal_name, calories, protein_grams, carbs_grams, fats_grams)
+VALUES (1, GETDATE(), 'Oatmeal with Banana', 350, 10.5, 60.0, 5.2);
 
 -- Trainers table
 CREATE TABLE TrainerProfiles (
@@ -128,12 +132,12 @@ CREATE TABLE TrainerProfiles (
     FOREIGN KEY (trainer_id) REFERENCES Users(user_id)
 );
 
-INSERT INTO TrainerProfiles (trainer_id, specialization, experience_years, rating, credentials) VALUES
-(2, 'Strength Training', 5, 4.8, 'ACE Certified');
+INSERT INTO TrainerProfiles (trainer_id, specialization, experience_years, rating, credentials)
+VALUES (2, 'Strength and Conditioning', 5, 4.8, 'ACE Certified');
 
 -- Trainer Reviews
 CREATE TABLE TrainerReviews (
-    review_id INT PRIMARY KEY AUTO_INCREMENT,
+    review_id INT PRIMARY KEY IDENTITY(1,1),
     trainer_id INT,
     client_id INT,
     rating INT,
@@ -143,19 +147,19 @@ CREATE TABLE TrainerReviews (
     FOREIGN KEY (client_id) REFERENCES Users(user_id)
 );
 
-INSERT INTO TrainerReviews (trainer_id, client_id, rating, comment, review_date) VALUES
-(2, 1, 5, 'Great trainer and very motivating!', '2025-05-06');
+INSERT INTO TrainerReviews (trainer_id, client_id, rating, comment, review_date)
+VALUES (2, 1, 5, 'Great session!', GETDATE());
 
 -- Admin Support Tickets
 CREATE TABLE SupportTickets (
-    ticket_id INT PRIMARY KEY AUTO_INCREMENT,
+    ticket_id INT PRIMARY KEY IDENTITY(1,1),
     user_id INT,
     category VARCHAR(100),
-    status ENUM('open', 'closed', 'in-progress'),
+    status VARCHAR(15) CHECK (status IN ('open', 'closed', 'in-progress')),
     description TEXT,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    created_at DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
-INSERT INTO SupportTickets (user_id, category, status, description) VALUES
-(1, 'App Bug', 'open', 'Unable to log workout from dashboard');
+INSERT INTO SupportTickets (user_id, category, status, description)
+VALUES (1, 'App Bug', 'open', 'The workout log is not saving correctly');

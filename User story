@@ -1,0 +1,423 @@
+Client Enthusiast User Stories
+
+
+
+1.	As a new user, I want to create a profile with my fitness goals and current stats so that I receive personalized workout recommendations. Acceptance Criteria:
+
+i.	Users can input personal details including age, height, weight, and gender.
+
+ii.	 Users can select fitness goals (lose weight, build muscle, improve endurance, etc.). 
+
+iii.	 Users can specify their current fitness level (beginner, intermediate, advanced). 
+
+iv.	System generates personalized workout recommendations based on provided information. 
+
+v.	Users can update their profile information at any time.
+
+
+
+2.	As a user, I want to browse workout programs by category so I can find routines that match my interests. 
+
+Acceptance Criteria:
+
+i.	Users can filter programs by categories (strength, cardio, flexibility, etc.). 
+
+ii.	Users can sort programs by duration, difficulty level, and popularity. 
+
+iii.	Each program displays a preview with description, estimated duration, and required equipment. 
+
+iv.	Users can save programs to their favorites for quick access. 
+
+v.	System recommends related programs based on user's browsing history.
+
+
+
+
+
+
+
+
+
+
+
+
+
+3.	As a user, I want to track my workout progress with metrics so I can see my improvement over time. 
+
+Acceptance Criteria: 
+
+i.	Users can record weights, reps, sets, and duration for each exercise. 
+
+ii.	System calculates and displays personal records for each exercise.  
+
+iii.	Users can view historical data in both tabular and graphical formats.
+
+iv.	System provides weekly and monthly progress summaries. 
+
+v.	Users can manually input measurements (body weight, body fat percentage, etc.).
+
+
+
+4.	As a user, I want to schedule workouts on a calendar so I can maintain a consistent routine. 
+
+Acceptance Criteria: 
+
+i.	Users can add workouts to specific dates and times on their calendar. 
+
+ii.	System prevents scheduling conflicts between workouts.
+
+iii.	Users can set recurring workouts (daily, weekly, custom patterns).
+
+iv.	Users can view their calendar in daily, weekly, and monthly formats.
+
+v.	Users can drag and drop to reschedule workouts.
+
+
+
+5.	As a user, I want to receive reminders before scheduled workouts so I don't miss my training sessions. 
+
+Acceptance Criteria:
+
+i.	Users can set reminder preferences (push notifications, email, SMS). 
+
+ii.	Users can customize reminder timing (15 minutes, 1 hour, 1 day before). 
+
+iii.	Reminders include workout details and equipment needed. 
+
+iv.	Users can snooze or dismiss reminders. 
+
+v.	System records user response to reminders for adherence tracking.
+
+
+
+6.	As a user, I want to connect with personal trainers who match my goals and preferences. 
+
+Acceptance Criteria: 
+
+i.	Users can search for trainers based on specialization, experience, and ratings. 
+
+ii.	System suggests compatible trainers based on user's profile and goals. 
+
+iii.	Users can view trainer profiles with credentials, reviews, and pricing. 
+
+iv.	Users can request to connect with trainers through the platform. 
+
+v.	Users can rate and review trainers after working with them.
+
+
+
+7.	As a user, I want to log my nutrition alongside workouts so I can see the correlation between diet and performance. 
+
+Acceptance Criteria: 
+
+i.	Users can log meals with portion sizes, macronutrients, and calories. 
+
+ii.	System provides a food database with nutritional information. 
+
+iii.	Users can create and save favorite meals for quick logging. 
+
+iv.	System generates reports showing nutrition patterns vs. workout performance. 
+
+v.	Users can set daily nutritional targets and track progress toward them.
+
+
+
+8.	As a user, I want to generate reports of my fitness progress over time. Acceptance Criteria: 
+
+i.	Users can select date ranges for progress reports. 
+
+ii.	Reports include key metrics (workout frequency, volume, personal records, etc.). 
+
+iii.	System generates visualizations comparing current vs. past performance. 
+
+iv.	Reports can be exported in PDF or CSV formats. 
+
+v.	System provides insight recommendations based on progress data.
+
+
+
+9.	As a user, I want to join group challenges to stay motivated and compete with others. 
+
+Acceptance Criteria: 
+
+i.	Users can browse available challenges by category and difficulty. 
+
+ii.	Users can create private challenges and invite specific members. 
+
+iii.	Challenge leaderboards update in real-time with participant progress. 
+
+iv.	System awards badges and achievements for challenge completion. 
+
+v.	Users receive notifications about challenge updates and results.
+
+
+
+10.	As a user, I want to access workout content offline so I can exercise without internet connection.  
+
+Acceptance Criteria: 
+
+i.	Users can download workout routines for offline access. 
+
+ii.	Downloaded content includes exercise instructions and demonstration videos. 
+
+iii.	System syncs offline activity data when connection is restored. 
+
+iv.	Users can manage storage use by selecting which content to download. 
+
+v.	System notifies users when downloaded content is outdated.
+
+
+
+
+
+
+
+
+
+Personal Trainer User Stories
+
+
+
+1.	As a trainer, I want to create and manage client profiles so I can track their progress and preferences. 
+
+Acceptance Criteria: 
+
+i.	Trainers can view detailed client profiles including goals and limitations. 
+
+ii.	Trainers can record notes on client progress and observations. 
+
+iii.	Trainers can set client-specific targets and milestones. 
+
+iv.	System alerts trainers of significant changes in client metrics. 
+
+v.	Trainers can group clients by categories for easier management.
+
+
+
+2.	As a trainer, I want to build custom workout programs that I can assign to multiple clients. 
+
+Acceptance Criteria: 
+
+i.	Trainers can create workout templates with exercises, sets, reps, and rest periods. 
+
+ii.	Trainers can include video demonstrations and written instructions. 
+
+iii.	Trainers can modify programs for individual clients while maintaining the template. 
+
+iv.	System shows which clients are assigned to each program. 
+
+v.	Trainers can duplicate and modify existing programs.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3.	As a trainer, I want to provide real-time feedback on client exercise form by reviewing uploaded videos. 
+
+Acceptance Criteria: 
+
+i.	Clients can upload exercise videos for trainer review. 
+
+ii.	Trainers can annotate videos with correction markers and comments. 
+
+iii.	Trainers can record voice feedback that syncs with video playback. 
+
+iv.	System notifies clients when feedback is available. 
+
+v.	Videos are stored securely with appropriate privacy controls.
+
+
+
+4.	As a trainer, I want to communicate with clients through in-app messaging.
+
+Acceptance Criteria: 
+
+i.	Trainers can send individual and group messages to clients. 
+
+ii.	Messaging supports text, images, videos, and file attachments. 
+
+iii.	Trainers receive notifications for client messages. 
+
+iv.	Message history is searchable and organized by client. 
+
+v.	Trainers can set office hours and automated responses.
+
+
+
+5.	As a trainer, I want to track client adherence to assigned workouts. Acceptance Criteria: 
+
+i.	System generates adherence reports showing completed vs. assigned workouts. 
+
+ii.	Trainers can view detailed breakdowns of client activity. 
+
+iii.	System flags clients with declining adherence patterns. 
+
+iv.	Trainers can send automated check-ins to inactive clients. 
+
+v.	Trainers can acknowledge and comment on client workout completions.
+
+
+
+6.	As a trainer, I want to showcase my credentials and specialties on my profile. 
+
+Acceptance Criteria: 
+
+i.	Trainers can upload verification documents for certifications. 
+
+ii.	Trainers can list specializations, experience, and training philosophy. 
+
+iii.	Trainers can display client testimonials and success stories. 
+
+iv.	Profile includes trainer availability and session rates. 
+
+v.	Profile showcases before/after results with client permission.
+
+
+
+7.	As a trainer, I want to schedule and conduct virtual training sessions with clients.
+
+Acceptance Criteria: 
+
+i.	Trainers can set availability for virtual sessions. 
+
+ii.	System handles scheduling with time zone conversion. 
+
+iii.	Virtual sessions include video conferencing with screen sharing. 
+
+iv.	Trainers can record sessions for client reference with permission. 
+
+v.	System sends automatic reminders before scheduled sessions.
+
+
+
+8.	As a trainer, I want to create nutrition plans that complement my clients' workout routines. 
+
+Acceptance Criteria: 
+
+i.	Trainers can create meal plans with specific macronutrient targets. 
+
+ii.	Trainers can suggest recipes and meal prep instructions. 
+
+iii.	System alerts trainers of client nutritional compliance. 
+
+iv.	Trainers can adjust nutrition plans based on workout performance data. 
+
+v.	Nutrition plans include allowances for dietary restrictions and preferences.
+
+
+
+
+
+
+
+
+
+Admin User Stories
+
+
+
+1.	As an admin, I want to verify trainer credentials so users can trust the professionals on the platform. 
+
+ Acceptance Criteria: 
+
+i.	Admins can review uploaded certification documents. 
+
+ii.	System performs automated verification checks with issuing organizations. 
+
+iii.	Verified trainers receive a badge on their profile. 
+
+iv.	System flags expired certifications requiring re-verification. 
+
+v.	Admins can revoke verification status with documented reasons.
+
+
+
+2.	As an admin, I want to moderate community content to ensure it adheres to platform guidelines.
+
+ Acceptance Criteria: 
+
+i.	System flags potentially inappropriate content for review. 
+
+ii.	Admins can review flagged content and take appropriate action. 
+
+iii.	Admins can issue warnings or suspend users violating guidelines. 
+
+iv.	System logs all moderation actions with timestamps and reasons. 
+
+v.	Users can appeal moderation decisions through a structured process.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+3.	As an admin, I want to generate analytics on platform usage to guide feature development.
+
+Acceptance Criteria: 
+
+i.	System provides dashboards showing key usage metrics. 
+
+ii.	Admins can filter analytics by user type, feature, and time period. 
+
+iii.	System identifies usage patterns and potential pain points. 
+
+iv.	Report compares current metrics against historical data. 
+
+v.	Data can be exported for external analysis.
+
+
+
+4.	As an admin, I want to manage subscription tiers and payment processing. 
+
+Acceptance Criteria: 
+
+i.	Admins can create and modify subscription plan details. 
+
+ii.	System handles recurring billing and payment processing. 
+
+iii.	Admins can view transaction history and revenue reports. 
+
+iv.	System manages proration for plan changes and refunds. 
+
+v.	Admins receive alerts for payment failures and subscription cancellations.
+
+
+
+5.	As an admin, I want to handle user support requests and resolve technical issues. 
+
+Acceptance Criteria: 
+
+i.	Admins can view and respond to support tickets from all users. 
+
+ii.	System categorizes and prioritizes support requests. 
+
+iii.	Admins can access user account details for troubleshooting. 
+
+iv.	System tracks resolution time and satisfaction metrics. 
+
+v.	Knowledge base of common issues and solutions is available

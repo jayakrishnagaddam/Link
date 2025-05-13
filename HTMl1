@@ -116,17 +116,16 @@
 </head>
 <body>
   <!-- Login Options -->
-  <div class="login-container">
-    <div class="btn-group">
-      <button type="button" class="login-dropdown dropdown-toggle" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-        <i class="fas fa-user-circle me-2"></i> Login
-      </button>
-      <ul class="dropdown-menu dropdown-menu-end">
-        <li><a class="dropdown-item" href="/user-login"><i class="fas fa-user me-2"></i> User Login</a></li>
-        <li><a class="dropdown-item" href="/trainer-login"><i class="fas fa-dumbbell me-2"></i> Trainer Login</a></li>
-        <li><a class="dropdown-item" href="/admin-login"><i class="fas fa-cog me-2"></i> Admin Login</a></li>
-      </ul>
-    </div>
+  <div class="login-container d-flex gap-2">
+    <a href="/user-login" class="btn btn-light btn-sm rounded-pill shadow-sm">
+      <i class="fas fa-user me-1"></i> User
+    </a>
+    <a href="/trainer-login" class="btn btn-light btn-sm rounded-pill shadow-sm">
+      <i class="fas fa-dumbbell me-1"></i> Trainer
+    </a>
+    <a href="/admin-login" class="btn btn-light btn-sm rounded-pill shadow-sm">
+      <i class="fas fa-cog me-1"></i> Admin
+    </a>
   </div>
   
   <!-- Hero Section with Gradient Background -->
@@ -257,14 +256,5 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    // Initialize all dropdowns
-    document.addEventListener('DOMContentLoaded', function() {
-      var dropdownElementList = [].slice.call(document.querySelectorAll('.dropdown-toggle'));
-      dropdownElementList.map(function(dropdownToggleEl) {
-        return new bootstrap.Dropdown(dropdownToggleEl);
-      });
-    });
-  </script>
 </body>
 </html>

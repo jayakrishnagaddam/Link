@@ -3,254 +3,129 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Track Fit App</title>
+  <title>Trainer Registration - Track Fit App</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f8f9fa;
-      color: #333;
-    }
-    
-    .gradient-background {
-      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-      color: white;
-      border-radius: 0 0 25% 25% / 30%;
-      padding: 3rem 0;
-      margin-bottom: 2rem;
-    }
-    
-    .hero-text {
-      font-size: 1.2rem;
-      line-height: 1.6;
-    }
-    
-    .app-title {
-      font-weight: 700;
-      letter-spacing: -1px;
-    }
-    
-    .feature-icon {
-      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-    
-    .login-container {
-      position: absolute;
-      top: 2rem;
-      right: 2rem;
-      z-index: 1000;
-    }
-    
-    .login-dropdown {
-      background-color: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      color: white;
-      border-radius: 50px;
-      padding: 0.5rem 1.5rem;
-      transition: all 0.3s ease;
-    }
-    
-    .login-dropdown:hover {
-      background-color: rgba(255, 255, 255, 0.3);
-    }
-    
-    .card {
-      border-radius: 15px;
-      overflow: hidden;
-      border: none;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-      transition: all 0.3s ease;
-    }
-    
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    }
-    
-    .btn-primary {
-      background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
-      border: none;
-      border-radius: 50px;
-      padding: 0.75rem 2rem;
-      font-weight: 600;
-      transition: all 0.3s ease;
-    }
-    
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 5px 15px rgba(106, 17, 203, 0.4);
-    }
-    
-    .footer {
-      background-color: #f1f1f1;
-      padding: 2rem 0;
-      margin-top: 4rem;
-    }
-    
-    @media (max-width: 768px) {
-      .login-container {
-        position: relative;
-        top: 0;
-        right: 0;
-        display: flex;
-        justify-content: center;
-        margin-top: 1rem;
-      }
-      
-      .gradient-background {
-        border-radius: 0 0 15% 15% / 20%;
-      }
-    }
   </style>
 </head>
 <body>
-  <!-- Login Options -->
-  <div class="login-container d-flex gap-2">
-    <a href="/user-login" class="btn btn-light btn-sm rounded-pill shadow-sm">
-      <i class="fas fa-user me-1"></i> User
-    </a>
-    <a href="/trainer-login" class="btn btn-light btn-sm rounded-pill shadow-sm">
-      <i class="fas fa-dumbbell me-1"></i> Trainer
-    </a>
-    <a href="/admin-login" class="btn btn-light btn-sm rounded-pill shadow-sm">
-      <i class="fas fa-cog me-1"></i> Admin
-    </a>
-  </div>
-  
-  <!-- Hero Section with Gradient Background -->
-  <div class="gradient-background position-relative">
-    <div class="container py-4">
-      <div class="row align-items-center">
-        <div class="col-md-6 text-center text-md-start">
-          <h1 class="display-4 fw-bold app-title">Track Fit App</h1>
-          <p class="hero-text mt-3 mb-4">
-            Your all-in-one fitness tracking solution. Set goals, log workouts, monitor your nutrition, and track your progress seamlessly.
-          </p>
-          <a href="/user-login" class="btn btn-light btn-lg px-4 me-2">
-            <i class="fas fa-play-circle me-2"></i> Get Started
-          </a>
-        </div>
-        <div class="col-md-6 d-none d-md-block">
-          <img src="/api/placeholder/500/400" class="img-fluid rounded-3 shadow" alt="Fitness Banner" />
-        </div>
-      </div>
+  <!-- Header -->
+  <div class="gradient-header position-relative">
+    <div class="container text-center py-4">
+      <a href="/" class="back-home">
+        <i class="fas fa-arrow-left me-2"></i> Back to Home
+      </a>
+      <h1 class="app-title">Track Fit App</h1>
     </div>
   </div>
 
-  <!-- Features Section -->
-  <div class="container mt-5">
-    <h2 class="text-center mb-5 fw-bold">Why Choose Track Fit App?</h2>
-    <div class="row g-4">
-      <div class="col-md-4">
-        <div class="card h-100 p-4 text-center">
-          <div class="feature-icon mx-auto">
-            <i class="fas fa-chart-line"></i>
-          </div>
-          <h3 class="h4 mb-3">Track Progress</h3>
-          <p>Monitor your fitness journey with detailed charts and metrics to see how far you've come.</p>
-        </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100 p-4 text-center">
-          <div class="feature-icon mx-auto">
+  <!-- Registration Form -->
+  <div class="container">
+    <div class="registration-container">
+      <div class="registration-card">
+        <div class="registration-header">
+          <div class="registration-icon">
             <i class="fas fa-dumbbell"></i>
           </div>
-          <h3 class="h4 mb-3">Custom Workouts</h3>
-          <p>Create and follow personalized workout plans tailored to your fitness goals and schedule.</p>
+          <h2>Trainer Registration</h2>
+          <p class="mb-0">Join our team of fitness professionals</p>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card h-100 p-4 text-center">
-          <div class="feature-icon mx-auto">
-            <i class="fas fa-utensils"></i>
-          </div>
-          <h3 class="h4 mb-3">Nutrition Planning</h3>
-          <p>Log meals, track calories, and maintain a balanced diet to complement your workouts.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Testimonial Section -->
-  <div class="container mt-5 pt-4">
-    <div class="row justify-content-center">
-      <div class="col-lg-8">
-        <div class="card p-4 text-center">
-          <div class="mb-3">
-            <i class="fas fa-quote-left fa-2x text-primary opacity-50"></i>
-          </div>
-          <p class="lead mb-4">"Track Fit has transformed my fitness journey. The intuitive interface and comprehensive tracking features have helped me stay consistent and motivated."</p>
-          <div class="d-flex justify-content-center align-items-center">
-            <div class="rounded-circle overflow-hidden me-3" style="width: 50px; height: 50px;">
-              <img src="/api/placeholder/50/50" class="img-fluid" alt="User Avatar">
+        <div class="card-body p-4 p-md-5">
+          <form #instancevar="ngForm" (ngSubmit)="method(instancevar)">
+            <!-- Email Field -->
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="fas fa-envelope"></i>
+                </span>
+                <input type="email" class="form-control" id="email" placeholder="your.email@example.com" required ngModel>
+              </div>
             </div>
-            <div class="text-start">
-              <h5 class="mb-0">Sarah Johnson</h5>
-              <small class="text-muted">Fitness Enthusiast</small>
+
+            <!-- Password Field -->
+            <div class="mb-1">
+              <label for="password" class="form-label">Password</label>
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="fas fa-lock"></i>
+                </span>
+                <input type="password" class="form-control" id="password" placeholder="Create a strong password" required ngModel>
+              </div>
             </div>
-          </div>
+            <div class="password-requirements">
+              <small>Password must be at least 8 characters with uppercase, lowercase, numbers, and special characters</small>
+            </div>
+
+            <!-- Confirm Password Field -->
+            <div class="mb-3">
+              <label for="confirmPassword" class="form-label">Confirm Password</label>
+              <div class="input-group">
+                <span class="input-group-text">
+                  <i class="fas fa-lock"></i>
+                </span>
+                <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm your password" required ngModel>
+              </div>
+            </div>
+
+            <div class="row">
+              <!-- Age Field -->
+              <div class="col-md-6 mb-3">
+                <label for="age" class="form-label">Age</label>
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="fas fa-birthday-cake"></i>
+                  </span>
+                  <input type="number" class="form-control" id="age" placeholder="Your age" min="18" max="99" required>
+                </div>
+              </div>
+
+              <!-- Gender Field -->
+              <div class="col-md-6 mb-3">
+                <label for="gender" class="form-label">Gender</label>
+                <select class="form-select" id="gender" required [(ngModel)]="selectedGender" name="gender">
+                  <option value="" selected disabled>Select gender</option>
+                  <option value="male">Male</option>
+                  <option value="female">Female</option>
+                  <option value="other">Other</option>
+                  <option value="prefer-not-to-say">Prefer not to say</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="mb-4">
+              <div class="form-check">
+                <input class="form-check-input" type="checkbox" id="termsCheck" required>
+                <label class="form-check-label" for="termsCheck">
+                  I agree to the <a href="#" class="text-decoration-none">Terms of Service</a> and <a href="#" class="text-decoration-none">Privacy Policy</a>
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+              <i class="fas fa-user-plus me-2"></i> Register as Trainer
+            </button>
+
+            <div class="text-center mt-4">
+              <p class="mb-0">Already have an account? <a href="/trainer-login" class="text-decoration-none">Login here</a></p>
+            </div>
+          </form>
         </div>
       </div>
-    </div>
-  </div>
-
-  <!-- CTA Section -->
-  <div class="container mt-5 text-center">
-    <div class="card p-5 bg-primary text-white">
-      <h2 class="mb-4">Ready to start your fitness journey?</h2>
-      <p class="lead mb-4">Join thousands of users who have transformed their lives with Track Fit App</p>
-      <a href="/user-login" class="btn btn-light btn-lg px-5">
-        <i class="fas fa-user-plus me-2"></i> Sign Up Now
-      </a>
     </div>
   </div>
 
   <!-- Footer -->
   <footer class="footer mt-5">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-4 mb-4 mb-md-0">
-          <h5 class="fw-bold">Track Fit App</h5>
-          <p>Your all-in-one fitness tracking solution for a healthier lifestyle.</p>
-        </div>
-        <div class="col-md-2 mb-4 mb-md-0">
-          <h5 class="fw-bold">Links</h5>
-          <ul class="list-unstyled">
-            <li class="mb-2"><a href="#" class="text-decoration-none text-dark">Home</a></li>
-            <li class="mb-2"><a href="#" class="text-decoration-none text-dark">Features</a></li>
-            <li class="mb-2"><a href="#" class="text-decoration-none text-dark">Pricing</a></li>
-            <li class="mb-2"><a href="#" class="text-decoration-none text-dark">Blog</a></li>
-          </ul>
-        </div>
-        <div class="col-md-2 mb-4 mb-md-0">
-          <h5 class="fw-bold">Support</h5>
-          <ul class="list-unstyled">
-            <li class="mb-2"><a href="#" class="text-decoration-none text-dark">Help Center</a></li>
-            <li class="mb-2"><a href="#" class="text-decoration-none text-dark">Contact Us</a></li>
-            <li class="mb-2"><a href="#" class="text-decoration-none text-dark">FAQs</a></li>
-          </ul>
-        </div>
-        <div class="col-md-4">
-          <h5 class="fw-bold">Connect</h5>
-          <div class="d-flex">
-            <a href="#" class="text-dark me-3"><i class="fab fa-facebook-f fa-lg"></i></a>
-            <a href="#" class="text-dark me-3"><i class="fab fa-twitter fa-lg"></i></a>
-            <a href="#" class="text-dark me-3"><i class="fab fa-instagram fa-lg"></i></a>
-            <a href="#" class="text-dark me-3"><i class="fab fa-youtube fa-lg"></i></a>
-          </div>
-          <p class="mt-3 mb-0">© 2025 Track Fit App. All rights reserved.</p>
-        </div>
+    <div class="container text-center">
+      <p class="mb-0">© 2025 Track Fit App. All rights reserved.</p>
+      <div class="mt-2">
+        <a href="#" class="text-dark me-3"><i class="fab fa-facebook-f"></i></a>
+        <a href="#" class="text-dark me-3"><i class="fab fa-twitter"></i></a>
+        <a href="#" class="text-dark me-3"><i class="fab fa-instagram"></i></a>
+        <a href="#" class="text-dark me-3"><i class="fab fa-youtube"></i></a>
       </div>
     </div>
   </footer>

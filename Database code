@@ -1,29 +1,38 @@
+Here's the revised and error-free SQL code for creating and initializing the trackfit database. Key changes include:
 
-create database trackfit
+Removed passwordConfirm from Users and Trainers (this should be handled in the frontend, not stored).
 
-use trackfit
+Made sure foreign key references match actual primary keys (TrainerProfiles now correctly references Trainers).
+
+Ensured all inserts align with existing primary key constraints.
 
 
+-- Create and use the database
+CREATE DATABASE trackfit;
+GO
+
+USE trackfit;
+GO
+
+-- Users Table
 CREATE TABLE Users (
     user_id INT PRIMARY KEY IDENTITY(1,1),
-    email VARCHAR(100) UNIQUE,
-    password VARCHAR(255),
-    passwordConfirm VARCHAR(255), 
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
     Age INT,
     Gender VARCHAR(10)
 );
 
-
+-- Trainers Table
 CREATE TABLE Trainers (
     trainer_id INT PRIMARY KEY IDENTITY(1,1),
-    email VARCHAR(100) UNIQUE,
-    password VARCHAR(255),
-    passwordConfirm VARCHAR(255), 
+    email VARCHAR(100) UNIQUE NOT NULL,
+    password VARCHAR(255) NOT NULL,
     Age INT,
     Gender VARCHAR(10)
 );
 
--- Client profiles with fitness goals and stats
+-- Client Profiles Table
 CREATE TABLE ClientProfiles (
     client_id INT PRIMARY KEY,
     age INT,
@@ -35,10 +44,7 @@ CREATE TABLE ClientProfiles (
     FOREIGN KEY (client_id) REFERENCES Users(user_id)
 );
 
-INSERT INTO ClientProfiles (client_id, age, height_cm, weight_kg, gender, fitness_goal, fitness_level)
-VALUES (1, 28, 170, 65, 'female', 'Weight Loss', 'beginner');
-
--- Workout Programs
+-- Workout Programs Table
 CREATE TABLE WorkoutPrograms (
     program_id INT PRIMARY KEY IDENTITY(1,1),
     title VARCHAR(100),
@@ -50,12 +56,7 @@ CREATE TABLE WorkoutPrograms (
     popularity_score INT DEFAULT 0
 );
 
-INSERT INTO WorkoutPrograms (title, category, duration_minutes, difficulty, equipment_required, description)
-VALUES 
-('Full Body Beginner', 'Strength', 45, 'beginner', 'Dumbbells', 'A full body program for beginners'),
-('Cardio Blast', 'Cardio', 30, 'intermediate', 'Treadmill', 'Intense cardio session for fat burn');
-
--- Favorites
+-- Favorites Table
 CREATE TABLE Favorites (
     user_id INT,
     program_id INT,
@@ -64,9 +65,7 @@ CREATE TABLE Favorites (
     FOREIGN KEY (program_id) REFERENCES WorkoutPrograms(program_id)
 );
 
-INSERT INTO Favorites (user_id, program_id) VALUES (1, 1);
-
--- Workout Tracking
+-- Workout Logs Table
 CREATE TABLE WorkoutLogs (
     log_id INT PRIMARY KEY IDENTITY(1,1),
     user_id INT,
@@ -81,10 +80,7 @@ CREATE TABLE WorkoutLogs (
     FOREIGN KEY (program_id) REFERENCES WorkoutPrograms(program_id)
 );
 
-INSERT INTO WorkoutLogs (user_id, program_id, exercise_name, sets, reps, weight_kg, duration_minutes, log_date)
-VALUES (1, 1, 'Squat', 3, 12, 40.5, 45, GETDATE());
-
--- Calendar Scheduling
+-- Workout Schedule Table
 CREATE TABLE WorkoutSchedule (
     schedule_id INT PRIMARY KEY IDENTITY(1,1),
     user_id INT,
@@ -95,10 +91,7 @@ CREATE TABLE WorkoutSchedule (
     FOREIGN KEY (program_id) REFERENCES WorkoutPrograms(program_id)
 );
 
-INSERT INTO WorkoutSchedule (user_id, program_id, scheduled_time, recurrence_pattern)
-VALUES (1, 2, DATEADD(DAY, 1, GETDATE()), 'Daily');
-
--- Reminders
+-- Reminders Table
 CREATE TABLE Reminders (
     reminder_id INT PRIMARY KEY IDENTITY(1,1),
     user_id INT,
@@ -110,10 +103,7 @@ CREATE TABLE Reminders (
     FOREIGN KEY (schedule_id) REFERENCES WorkoutSchedule(schedule_id)
 );
 
-INSERT INTO Reminders (user_id, schedule_id, type, reminder_time)
-VALUES (1, 1, 'email', DATEADD(HOUR, -1, (SELECT scheduled_time FROM WorkoutSchedule WHERE schedule_id = 1)));
-
--- Nutrition Logging
+-- Nutrition Logs Table
 CREATE TABLE NutritionLogs (
     log_id INT PRIMARY KEY IDENTITY(1,1),
     user_id INT,
@@ -126,23 +116,17 @@ CREATE TABLE NutritionLogs (
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
-INSERT INTO NutritionLogs (user_id, log_date, meal_name, calories, protein_grams, carbs_grams, fats_grams)
-VALUES (1, GETDATE(), 'Oatmeal with Banana', 350, 10.5, 60.0, 5.2);
-
--- Trainers table
+-- Trainer Profiles Table
 CREATE TABLE TrainerProfiles (
     trainer_id INT PRIMARY KEY,
     specialization TEXT,
     experience_years INT,
     rating DECIMAL(3,2),
     credentials TEXT,
-    FOREIGN KEY (trainer_id) REFERENCES Users(user_id)
+    FOREIGN KEY (trainer_id) REFERENCES Trainers(trainer_id)
 );
 
-INSERT INTO TrainerProfiles (trainer_id, specialization, experience_years, rating, credentials)
-VALUES (2, 'Strength and Conditioning', 5, 4.8, 'ACE Certified');
-
--- Trainer Reviews
+-- Trainer Reviews Table
 CREATE TABLE TrainerReviews (
     review_id INT PRIMARY KEY IDENTITY(1,1),
     trainer_id INT,
@@ -150,14 +134,11 @@ CREATE TABLE TrainerReviews (
     rating INT,
     comment TEXT,
     review_date DATE,
-    FOREIGN KEY (trainer_id) REFERENCES Users(user_id),
+    FOREIGN KEY (trainer_id) REFERENCES Trainers(trainer_id),
     FOREIGN KEY (client_id) REFERENCES Users(user_id)
 );
 
-INSERT INTO TrainerReviews (trainer_id, client_id, rating, comment, review_date)
-VALUES (2, 1, 5, 'Great session!', GETDATE());
-
--- Admin Support Tickets
+-- Support Tickets Table
 CREATE TABLE SupportTickets (
     ticket_id INT PRIMARY KEY IDENTITY(1,1),
     user_id INT,
@@ -168,5 +149,56 @@ CREATE TABLE SupportTickets (
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
+-- Sample Data Insertion
+
+-- Insert Users
+INSERT INTO Users (email, password, Age, Gender)
+VALUES ('user1@example.com', 'hashedpassword1', 28, 'female');
+
+-- Insert Trainers
+INSERT INTO Trainers (email, password, Age, Gender)
+VALUES ('trainer1@example.com', 'hashedpassword2', 32, 'male');
+
+-- Insert Client Profile (make sure user_id = 1 exists)
+INSERT INTO ClientProfiles (client_id, age, height_cm, weight_kg, gender, fitness_goal, fitness_level)
+VALUES (1, 28, 170, 65, 'female', 'Weight Loss', 'beginner');
+
+-- Insert Workout Programs
+INSERT INTO WorkoutPrograms (title, category, duration_minutes, difficulty, equipment_required, description)
+VALUES 
+('Full Body Beginner', 'Strength', 45, 'beginner', 'Dumbbells', 'A full body program for beginners'),
+('Cardio Blast', 'Cardio', 30, 'intermediate', 'Treadmill', 'Intense cardio session for fat burn');
+
+-- Insert Favorites
+INSERT INTO Favorites (user_id, program_id) VALUES (1, 1);
+
+-- Insert Workout Logs
+INSERT INTO WorkoutLogs (user_id, program_id, exercise_name, sets, reps, weight_kg, duration_minutes, log_date)
+VALUES (1, 1, 'Squat', 3, 12, 40.5, 45, GETDATE());
+
+-- Insert Workout Schedule
+INSERT INTO WorkoutSchedule (user_id, program_id, scheduled_time, recurrence_pattern)
+VALUES (1, 2, DATEADD(DAY, 1, GETDATE()), 'Daily');
+
+-- Insert Reminder
+INSERT INTO Reminders (user_id, schedule_id, type, reminder_time)
+VALUES (1, 1, 'email', DATEADD(HOUR, -1, (SELECT scheduled_time FROM WorkoutSchedule WHERE schedule_id = 1)));
+
+-- Insert Nutrition Log
+INSERT INTO NutritionLogs (user_id, log_date, meal_name, calories, protein_grams, carbs_grams, fats_grams)
+VALUES (1, GETDATE(), 'Oatmeal with Banana', 350, 10.5, 60.0, 5.2);
+
+-- Insert Trainer Profile (assuming trainer_id = 1 exists)
+INSERT INTO TrainerProfiles (trainer_id, specialization, experience_years, rating, credentials)
+VALUES (1, 'Strength and Conditioning', 5, 4.8, 'ACE Certified');
+
+-- Insert Trainer Review
+INSERT INTO TrainerReviews (trainer_id, client_id, rating, comment, review_date)
+VALUES (1, 1, 5, 'Great session!', GETDATE());
+
+-- Insert Support Ticket
 INSERT INTO SupportTickets (user_id, category, status, description)
 VALUES (1, 'App Bug', 'open', 'The workout log is not saving correctly');
+
+Let me know if you'd like additional constraints, indexing, or seeding scripts for testing.
+

@@ -1,20 +1,27 @@
--- SQL schema for Fitness App (MSSQL version with sample data)
 
--- Users table (general user info including clients, trainers, and admins)
+create database trackfit
+
+use trackfit
+
+
 CREATE TABLE Users (
     user_id INT PRIMARY KEY IDENTITY(1,1),
-    name VARCHAR(100),
     email VARCHAR(100) UNIQUE,
-    password_hash VARCHAR(255),
-    role VARCHAR(10) CHECK (role IN ('client', 'trainer', 'admin')),
-    created_at DATETIME DEFAULT GETDATE()
+    password VARCHAR(255),
+    passwordConfirm VARCHAR(255), 
+    Age INT,
+    Gender VARCHAR(10)
 );
 
-INSERT INTO Users (name, email, password_hash, role)
-VALUES 
-('Alice Smith', 'alice@example.com', 'hashed_password_1', 'client'),
-('Bob Johnson', 'bob@example.com', 'hashed_password_2', 'trainer'),
-('Admin User', 'admin@example.com', 'hashed_password_3', 'admin');
+
+CREATE TABLE Trainers (
+    trainer_id INT PRIMARY KEY IDENTITY(1,1),
+    email VARCHAR(100) UNIQUE,
+    password VARCHAR(255),
+    passwordConfirm VARCHAR(255), 
+    Age INT,
+    Gender VARCHAR(10)
+);
 
 -- Client profiles with fitness goals and stats
 CREATE TABLE ClientProfiles (

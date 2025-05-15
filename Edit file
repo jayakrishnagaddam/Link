@@ -1,16 +1,36 @@
- <div class="card-body p-4 p-md-5">
-   <form [formGroup]="TrainerRegistrationForm" (ngSubmit)="SubmitForm(TrainerRegistrationForm)">
-     <!-- Email Field -->
-     <div class="mb-3">
-       <label for="email" class="form-label">Email Address</label>
-       <div class="input-group">
-         <span class="input-group-text">
-           <i class="fas fa-envelope"></i>
-         </span>
-         <input type="email" class="form-control" id="email" placeholder="your.email@example.com" formControlName="email" required>
-        
-           <p *ngIf="TrainerRegistrationForm.controls['email'].errors?.['required'] && TrainerRegistrationForm.controls['email'].touched" class="alert alert-danger">This field is required!</p>
-           <p *ngIf="TrainerRegistrationForm.controls['email'].errors?.['minlength'] &&  TrainerRegistrationForm.controls['email'].touched" class="alert alert-danger">The EmailId is not proper!</p>
-         
-         </div>
-     </div>
+To display the validation error inside the input field itself rather than beside it, you can dynamically change the input field's placeholder based on the validation state. Here’s how you can do it:
+
+Updated Code for the Email Field:
+
+<div class="mb-3">
+  <label for="email" class="form-label">Email Address</label>
+  <div class="input-group">
+    <span class="input-group-text">
+      <i class="fas fa-envelope"></i>
+    </span>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      [placeholder]="
+        TrainerRegistrationForm.controls['email'].touched && TrainerRegistrationForm.controls['email'].errors?.['required']
+          ? 'This field is required!'
+          : TrainerRegistrationForm.controls['email'].errors?.['minlength']
+            ? 'The EmailId is not proper!'
+            : 'your.email@example.com'
+      "
+      formControlName="email"
+      required
+    />
+  </div>
+</div>
+
+Key Changes:
+
+Replaced the static placeholder with a dynamic one using Angular’s property binding [].
+
+It checks the touched state and specific errors (required, minlength) to show messages inside the field.
+
+
+Let me know if you'd also like to highlight the input border with red when there’s an error for better UX.
+

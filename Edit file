@@ -1,0 +1,16 @@
+ <div class="card-body p-4 p-md-5">
+   <form [formGroup]="TrainerRegistrationForm" (ngSubmit)="SubmitForm(TrainerRegistrationForm)">
+     <!-- Email Field -->
+     <div class="mb-3">
+       <label for="email" class="form-label">Email Address</label>
+       <div class="input-group">
+         <span class="input-group-text">
+           <i class="fas fa-envelope"></i>
+         </span>
+         <input type="email" class="form-control" id="email" placeholder="your.email@example.com" formControlName="email" required>
+        
+           <p *ngIf="TrainerRegistrationForm.controls['email'].errors?.['required'] && TrainerRegistrationForm.controls['email'].touched" class="alert alert-danger">This field is required!</p>
+           <p *ngIf="TrainerRegistrationForm.controls['email'].errors?.['minlength'] &&  TrainerRegistrationForm.controls['email'].touched" class="alert alert-danger">The EmailId is not proper!</p>
+         
+         </div>
+     </div>
